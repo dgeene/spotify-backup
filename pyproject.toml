@@ -1,14 +1,14 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["poetry-core>=1.9.0"]
+build-backend = "poetry.core.masonry.api"
 
 [project]
 name = "spotify-backup"
 version = "0.1.0"
 description = "Back up Spotify playlists to JSON and M3U with legal purchase search links."
 readme = "README.md"
-requires-python = ">=3.11"
-license = { text = "MIT" }
+requires-python = ">=3.11,<4.0"
+license = "MIT"
 authors = [{ name = "spotify-backup contributors" }]
 dependencies = [
     "python-dotenv>=1.0.0",
@@ -16,17 +16,15 @@ dependencies = [
     "typer>=0.12.0",
 ]
 
-[project.optional-dependencies]
-dev = [
-    "pytest>=8.0.0",
-    "ruff>=0.5.0",
-]
-
 [project.scripts]
 spotify-backup = "spotify_backup.cli:app"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/spotify_backup"]
+[tool.poetry]
+packages = [{ include = "spotify_backup", from = "src" }]
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.0.0"
+ruff = ">=0.5.0"
 
 [tool.ruff]
 line-length = 100

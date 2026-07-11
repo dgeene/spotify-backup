@@ -41,10 +41,8 @@ Spotify's OAuth flow is easiest if you treat the first login as an interactive s
 6. Install locally and authorize:
 
    ```sh
-   python -m venv .venv
-   . .venv/bin/activate
-   pip install -e .
-   spotify-backup auth --data-dir ./data --token-file ./data/tokens.json
+   poetry install
+   poetry run spotify-backup auth --data-dir ./data --token-file ./data/tokens.json
    ```
 
 The CLI starts a tiny local callback server, prints a Spotify authorization URL, and usually opens it in your browser. After you approve access, Spotify redirects back to the local callback and the app stores a refresh token at `./data/tokens.json`.
@@ -57,7 +55,7 @@ Required scopes:
 ## Run A Backup
 
 ```sh
-spotify-backup backup --data-dir ./data --token-file ./data/tokens.json
+poetry run spotify-backup backup --data-dir ./data --token-file ./data/tokens.json
 ```
 
 Backups are written to:
@@ -71,7 +69,7 @@ data/latest.json
 To back up only specific playlists:
 
 ```sh
-spotify-backup backup --playlist-id spotify_playlist_id
+poetry run spotify-backup backup --playlist-id spotify_playlist_id
 ```
 
 ## Docker Service
